@@ -1,12 +1,35 @@
 "use client";
 
+import { useActionState, useState } from "react";
 import Image from "next/image";
-import { useActionState } from "react";
 import { saveProfile } from "../services/profile-service";
 import type { Profile } from "@prisma/client";
 
+const MAX_FILE_SIZE_MB = 5;
+
 export function ProfileForm({ profile }: { profile: Profile | null }) {
   const [state, formAction, pending] = useActionState(saveProfile, {});
+  const [cvError, setCvError] = useState<string | null>(null);
+  const [photoError, setPhotoError] = useState<string | null>(null);
+
+  function validateFile(
+    e: React.ChangeEvent<HTMLInputElement>,
+    setError: (msg: string | null) => void
+  ) {
+    const file = e.target.files?.[0];
+    if (!file) {
+      setError(null);
+      return;
+    }
+    if (file.size > MAX_FILE_SIZE_MB * 1024 * 1024) {
+      setError(`Ukuran file maksimal ${MAX_FILE_SIZE_MB}MB. File kamu ${(file.size / 1024 / 1024).toFixed(1)}MB.`);
+      e.target.value = "";
+    } else {
+      setError(null);
+    }
+  }
+
+  const hasError = !!cvError || !!photoError;
 
   return (
     <form action={formAction} className="flex max-w-xl flex-col gap-4">
@@ -16,8 +39,14 @@ export function ProfileForm({ profile }: { profile: Profile | null }) {
       <TextArea label="About" name="aboutText" defaultValue={profile?.aboutText} required />
 
       <label className="flex flex-col gap-1 text-sm">
-        CV (PDF)
-        <input type="file" name="cvFile" accept="application/pdf" />
+        CV (PDF, maks {MAX_FILE_SIZE_MB}MB)
+        <input
+          type="file"
+          name="cvFile"
+          accept="application/pdf"
+          onChange={(e) => validateFile(e, setCvError)}
+        />
+        {cvError && <p className="text-sm text-red-500">{cvError}</p>}
         {profile?.cvUrl && (
           <a href={profile.cvUrl} target="_blank" className="text-xs underline">
             Lihat CV saat ini
@@ -26,8 +55,14 @@ export function ProfileForm({ profile }: { profile: Profile | null }) {
       </label>
 
       <label className="flex flex-col gap-1 text-sm">
-        Foto profil
-        <input type="file" name="photoFile" accept="image/*" />
+        Foto profil (maks {MAX_FILE_SIZE_MB}MB)
+        <input
+          type="file"
+          name="photoFile"
+          accept="image/*"
+          onChange={(e) => validateFile(e, setPhotoError)}
+        />
+        {photoError && <p className="text-sm text-red-500">{photoError}</p>}
         {profile?.photoUrl && (
           <Image src={profile.photoUrl} alt="Current" width={128} height={128} className="mt-2 object-cover" />
         )}
@@ -39,7 +74,7 @@ export function ProfileForm({ profile }: { profile: Profile | null }) {
       <Field label="WhatsApp" name="whatsapp" defaultValue={profile?.whatsapp ?? ""} />
 
       {state.success && <p className="text-sm text-green-600">Tersimpan</p>}
-      <button type="submit" disabled={pending}>
+      <button type="submit" disabled={pending || hasError}>
         {pending ? "Saving..." : "Save"}
       </button>
     </form>
