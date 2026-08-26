@@ -1,5 +1,6 @@
-export { auth as middleware } from "@/shared/lib/auth";
+import NextAuth from "next-auth";
+import { authConfig } from "@/shared/lib/auth.config";
 
-export const config = {
-  matcher: ["/dashboard/:path*"],
-};
+const { auth } = NextAuth(authConfig);
+
+export default auth;
