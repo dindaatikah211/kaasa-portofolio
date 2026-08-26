@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useActionState } from "react";
 import { saveProfile } from "../services/profile-service";
 import type { Profile } from "@prisma/client";
@@ -13,12 +14,30 @@ export function ProfileForm({ profile }: { profile: Profile | null }) {
       <Field label="Greeting" name="greeting" defaultValue={profile?.greeting} required />
       <Field label="Tagline" name="tagline" defaultValue={profile?.tagline} required />
       <TextArea label="About" name="aboutText" defaultValue={profile?.aboutText} required />
-      <Field label="CV URL" name="cvUrl" defaultValue={profile?.cvUrl ?? ""} />
+
+      <label className="flex flex-col gap-1 text-sm">
+        CV (PDF)
+        <input type="file" name="cvFile" accept="application/pdf" />
+        {profile?.cvUrl && (
+          <a href={profile.cvUrl} target="_blank" className="text-xs underline">
+            Lihat CV saat ini
+          </a>
+        )}
+      </label>
+
+      <label className="flex flex-col gap-1 text-sm">
+        Foto profil
+        <input type="file" name="photoFile" accept="image/*" />
+        {profile?.photoUrl && (
+          <Image src={profile.photoUrl} alt="Current" width={128} height={128} className="mt-2 object-cover" />
+        )}
+      </label>
+
       <Field label="Instagram" name="instagram" defaultValue={profile?.instagram ?? ""} />
       <Field label="GitHub" name="github" defaultValue={profile?.github ?? ""} />
       <Field label="LinkedIn" name="linkedin" defaultValue={profile?.linkedin ?? ""} />
       <Field label="WhatsApp" name="whatsapp" defaultValue={profile?.whatsapp ?? ""} />
-      <Field label="Photo URL" name="photoUrl" defaultValue={profile?.photoUrl ?? ""} />
+
       {state.success && <p className="text-sm text-green-600">Tersimpan</p>}
       <button type="submit" disabled={pending}>
         {pending ? "Saving..." : "Save"}
