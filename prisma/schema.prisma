@@ -79,14 +79,17 @@ enum ProjectCategory {
 }
 
 model Project {
-  id          String          @id @default(cuid())
-  title       String
-  description String?
-  imageUrl    String?
-  link        String?
-  category    ProjectCategory
-  order       Int             @default(0)
-  createdAt   DateTime        @default(now())
+  id             String          @id @default(cuid())
+  title          String
+  description    String?
+  imageUrl       String?
+  link           String?
+  linkLabel      String?
+  secondaryLink  String?
+  secondaryLabel String?
+  category       ProjectCategory
+  order          Int             @default(0)
+  createdAt      DateTime        @default(now())
 }
 
 model Certification {
