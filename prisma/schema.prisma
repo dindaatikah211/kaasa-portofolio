@@ -88,6 +88,7 @@ model Project {
   secondaryLink  String?
   secondaryLabel String?
   category       ProjectCategory
+  subcategory    String?
   order          Int             @default(0)
   createdAt      DateTime        @default(now())
 }
