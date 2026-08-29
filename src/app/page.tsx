@@ -1,12 +1,12 @@
-import { prisma } from "@/shared/lib/prisma";
+import { FlowerField } from "@/features/landing/components/flower-field";
 
-export default async function Home() {
-  const adminCount = await prisma.admin.count();
-
+export default function Home() {
   return (
-    <main style={{ padding: 40 }}>
-      <h1>Koneksi database berhasil ✅</h1>
-      <p>Jumlah admin saat ini: {adminCount}</p>
+    <main
+      className="relative h-screen w-full overflow-hidden"
+      style={{ background: "linear-gradient(180deg, #fff8f2 0%, #ffd4a8 60%, #ff9fc7 100%)" }}
+    >
+      <FlowerField />
     </main>
   );
 }

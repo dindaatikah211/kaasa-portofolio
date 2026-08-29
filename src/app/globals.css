@@ -81,6 +81,14 @@
   --sidebar-accent-foreground: oklch(0.205 0 0);
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
+
+  --ink: #2b1810;
+  --cream: #fff8f2;
+  --peach: #ffb088;
+  --coral: #ff7a6b;
+  --rose: #ff9fc7;
+  --font-display: "Fraunces", serif;
+  --font-body: "Sora", sans-serif;
 }
 
 .dark {
@@ -127,4 +135,9 @@
   html {
     @apply font-sans;
   }
+}
+
+.font-display {
+  font-family: var(--font-display);
+  font-style: italic;
 }
