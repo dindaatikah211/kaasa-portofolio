@@ -15,18 +15,19 @@ model Admin {
 }
 
 model Profile {
-  id        String   @id @default(cuid())
-  name      String
-  greeting  String
-  tagline   String
-  aboutText String
-  cvUrl     String?
-  instagram String?
-  github    String?
-  linkedin  String?
-  whatsapp  String?
-  photoUrl  String?
-  updatedAt DateTime @updatedAt
+  id          String   @id @default(cuid())
+  name        String
+  greeting    String
+  tagline     String
+  aboutText   String
+  cvUrl       String?
+  instagram   String?
+  github      String?
+  linkedin    String?
+  whatsapp    String?
+  photoUrl    String?
+  galleryUrls String[]
+  updatedAt   DateTime @updatedAt
 }
 
 model Experience {
