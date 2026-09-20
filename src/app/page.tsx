@@ -2,7 +2,7 @@ import { prisma } from "@/shared/lib/prisma";
 import { Hero } from "@/features/landing/components/hero";
 import { AboutSection } from "@/features/landing/components/about-section";
 import { TimelineList } from "@/features/landing/components/timeline-list";
-import { SectionHeading } from "@/features/landing/components/section-heading";
+import { Section } from "@/features/landing/components/section";
 import { SkillsSection } from "@/features/landing/components/skills-section";
 import { ProjectsSection } from "@/features/landing/components/projects-section";
 import { CertificationsSection } from "@/features/landing/components/certifications-section";
@@ -44,8 +44,7 @@ export default async function Home() {
 
       <AboutSection aboutText={profile?.aboutText ?? ""} cvUrl={profile?.cvUrl} />
 
-      <section id="experience" className="px-6 py-24 sm:px-16" style={{ background: "var(--blush)" }}>
-        <SectionHeading eyebrow="Track record" title="Experience" />
+      <Section id="experience" tone="blush" eyebrow="Track record" title="Experience">
         <TimelineList
           items={experience.map((e) => ({
             id: e.id,
@@ -55,11 +54,11 @@ export default async function Home() {
             bullets: e.bullets,
           }))}
         />
-      </section>
+      </Section>
 
-      <section id="education" className="px-6 py-24 sm:px-16" style={{ background: "var(--cream)" }}>
-        <SectionHeading eyebrow="Background" title="Education" />
+      <Section id="education" tone="cream" eyebrow="Background" title="Education">
         <TimelineList
+          plain
           items={education.map((e) => ({
             id: e.id,
             title: e.title,
@@ -68,10 +67,9 @@ export default async function Home() {
             bullets: e.bullets,
           }))}
         />
-      </section>
+      </Section>
 
-      <section id="organization" className="px-6 py-24 sm:px-16" style={{ background: "var(--blush)" }}>
-        <SectionHeading eyebrow="Beyond class" title="Organization" />
+      <Section id="organization" tone="blush" eyebrow="Beyond class" title="Organization">
         <TimelineList
           items={organization.map((o) => ({
             id: o.id,
@@ -81,10 +79,9 @@ export default async function Home() {
             bullets: o.bullets,
           }))}
         />
-      </section>
+      </Section>
 
-      <section id="volunteer" className="px-6 py-24 sm:px-16" style={{ background: "var(--cream)" }}>
-        <SectionHeading eyebrow="Giving back" title="Volunteer" />
+      <Section id="volunteer" tone="cream" eyebrow="Giving back" title="Volunteer">
         <TimelineList
           items={volunteer.map((v) => ({
             id: v.id,
@@ -94,14 +91,14 @@ export default async function Home() {
             bullets: v.bullets,
           }))}
         />
-      </section>
+      </Section>
 
       <SkillsSection skills={skills} />
       <ProjectsSection projects={projects} />
       <CertificationsSection items={certifications} />
       <ContactSection socials={socials} />
 
-      <footer className="px-6 py-8 text-center text-xs text-[var(--ink)]/50">
+      <footer className="bg-cream px-6 py-8 text-center text-xs text-ink/50">
         © {new Date().getFullYear()} Dinda Atikah Ghaisani. All rights reserved.
       </footer>
     </main>

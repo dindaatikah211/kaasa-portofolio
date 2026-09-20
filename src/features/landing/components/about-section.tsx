@@ -1,23 +1,20 @@
+import { Section } from "./section";
+
 export function AboutSection({ aboutText, cvUrl }: { aboutText: string; cvUrl?: string | null }) {
   return (
-    <section id="about" className="px-6 py-24 sm:px-16" style={{ background: "var(--cream)" }}>
-      <div className="mx-auto max-w-3xl text-center">
-        <p className="mb-2 text-xs uppercase tracking-[0.2em]" style={{ color: "var(--sage-dark)" }}>
-          Get to know me
-        </p>
-        <h2 className="font-display text-4xl">About</h2>
-        <p className="mt-6 leading-relaxed text-[var(--ink)]/70">{aboutText}</p>
+    <Section id="about" tone="cream" eyebrow="Get to know me" title="About">
+      <div className="reveal mx-auto max-w-2xl text-center">
+        <p className="leading-relaxed text-ink/70">{aboutText}</p>
         {cvUrl && (
           <a
             href={cvUrl}
             target="_blank"
-            className="mt-6 inline-block rounded-full px-6 py-2.5 text-sm font-medium text-white"
-            style={{ background: "var(--pink)" }}
+            className="mt-6 inline-block rounded-full bg-red px-6 py-2.5 text-sm font-medium text-cream transition-transform hover:-translate-y-0.5"
           >
             Download CV
           </a>
         )}
       </div>
-    </section>
+    </Section>
   );
 }
