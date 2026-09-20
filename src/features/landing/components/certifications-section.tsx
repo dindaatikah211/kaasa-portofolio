@@ -8,19 +8,19 @@ export function CertificationsSection({ items }: { items: CertificationItem[] })
         Verified
       </p>
       <h2 className="mb-10 text-center font-display text-4xl">Certifications</h2>
-      <div className="mx-auto grid max-w-3xl grid-cols-1 gap-6 sm:grid-cols-2">
+      <div className="mx-auto grid max-w-3xl grid-cols-2 gap-3 sm:gap-6">
         {items.map((c) => (
           <div key={c.id} className="overflow-hidden rounded-2xl bg-white/70">
             {c.imageUrl && (
-              <div className="relative h-40 w-full">
+              <div className="relative aspect-[4/3] w-full">
                 <Image src={c.imageUrl} alt={c.title} fill unoptimized className="object-cover" />
               </div>
             )}
-            <p className="p-4 text-sm font-medium">{c.title}</p>
+            <p className="p-3 text-xs font-medium sm:p-4 sm:text-sm">{c.title}</p>
           </div>
         ))}
         {items.length === 0 && (
-          <p className="text-center text-sm italic text-[var(--ink)]/50">Belum ada data.</p>
+          <p className="col-span-full text-center text-sm italic text-[var(--ink)]/50">Belum ada data.</p>
         )}
       </div>
     </section>

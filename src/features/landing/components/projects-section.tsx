@@ -9,7 +9,7 @@ function ProjectImage({ src, alt }: { src: string | null; alt: string }) {
   if (!src) {
     return (
       <div
-        className="flex h-40 w-full items-center justify-center text-xs"
+        className="flex aspect-[4/3] w-full items-center justify-center text-xs"
         style={{ background: "var(--blush)", color: "var(--ink)" }}
       >
         No image yet
@@ -18,7 +18,7 @@ function ProjectImage({ src, alt }: { src: string | null; alt: string }) {
   }
 
   return (
-    <div className="relative h-40 w-full">
+    <div className="relative aspect-[4/3] w-full">
       <Image src={src} alt={alt} fill unoptimized className="object-cover" />
     </div>
   );
@@ -42,7 +42,7 @@ export function ProjectsSection({ projects }: { projects: ProjectItem[] }) {
           <button
             key={c.value}
             onClick={() => setActive(c.value)}
-            className="rounded-full px-5 py-2 text-sm font-medium transition-colors"
+            className="rounded-full px-4 py-1.5 text-xs font-medium transition-colors sm:px-5 sm:py-2 sm:text-sm"
             style={{
               background: active === c.value ? "var(--pink)" : "var(--sage)",
               color: active === c.value ? "white" : "var(--ink)",
@@ -55,7 +55,7 @@ export function ProjectsSection({ projects }: { projects: ProjectItem[] }) {
 
       <div
         key={active}
-        className="mx-auto grid max-w-5xl animate-[fadeIn_0.4s_ease-out] grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3"
+        className="mx-auto grid max-w-5xl animate-[fadeIn_0.4s_ease-out] grid-cols-2 gap-3 sm:gap-6 lg:grid-cols-3"
       >
         {items.map((p) => (
           <div
@@ -64,12 +64,14 @@ export function ProjectsSection({ projects }: { projects: ProjectItem[] }) {
             style={{ borderColor: "var(--sage)", background: "white" }}
           >
             <ProjectImage src={p.imageUrl} alt={p.title} />
-            <div className="p-4">
-              <p className="font-display text-lg">{p.title}</p>
+            <div className="p-3 sm:p-4">
+              <p className="font-display text-base sm:text-lg">{p.title}</p>
               {p.description && (
-                <p className="mt-1 text-sm text-[var(--ink)]/60">{p.description}</p>
+                <p className="mt-1 line-clamp-2 text-xs text-[var(--ink)]/60 sm:text-sm sm:line-clamp-none">
+                  {p.description}
+                </p>
               )}
-              <div className="mt-3 flex gap-3 text-sm">
+              <div className="mt-3 flex gap-3 text-xs sm:text-sm">
                 {p.link && (
                   <a href={p.link} target="_blank" style={{ color: "var(--pink)" }}>
                     {p.linkLabel ?? "See"} →
