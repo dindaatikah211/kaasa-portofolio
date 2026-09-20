@@ -1,6 +1,8 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
+@import "@fontsource-variable/fraunces/opsz.css";
+@import "@fontsource-variable/dm-sans";
 
 @custom-variant dark (&:is(.dark *));
 
@@ -46,6 +48,79 @@
   --radius-2xl: calc(var(--radius) * 1.8);
   --radius-3xl: calc(var(--radius) * 2.2);
   --radius-4xl: calc(var(--radius) * 2.6);
+  --color-ink: var(--ink);
+  --color-cream: var(--cream);
+  --color-paper: var(--paper);
+  --color-blush: var(--blush);
+  --color-pink: var(--pink);
+  --color-red: var(--red);
+  --color-sky: var(--sky);
+}
+
+@theme {
+  --animate-rise: rise 0.7s ease-out backwards;
+  --animate-drop: drop 0.7s ease-out backwards;
+  --animate-slide-up: slide-up 0.9s cubic-bezier(0.2, 0.8, 0.2, 1) backwards;
+  --animate-pop: pop 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) backwards;
+  --animate-grow: grow 1s cubic-bezier(0.2, 0.8, 0.2, 1) backwards;
+  --animate-float: float 7s ease-in-out infinite;
+  --animate-twinkle: twinkle 4s ease-in-out infinite;
+  --animate-bob: bob 1.8s ease-in-out infinite;
+
+  @keyframes rise {
+    from {
+      opacity: 0;
+      translate: 0 1rem;
+    }
+  }
+
+  @keyframes drop {
+    from {
+      opacity: 0;
+      translate: 0 -1rem;
+    }
+  }
+
+  @keyframes slide-up {
+    from {
+      translate: 0 105%;
+    }
+  }
+
+  @keyframes pop {
+    from {
+      opacity: 0;
+      scale: 0.85;
+      rotate: -6deg;
+    }
+  }
+
+  @keyframes grow {
+    from {
+      opacity: 0;
+      scale: 1 0;
+    }
+  }
+
+  @keyframes float {
+    50% {
+      translate: 0 -8px;
+    }
+  }
+
+  @keyframes twinkle {
+    50% {
+      opacity: 0.5;
+      scale: 0.75;
+      rotate: 20deg;
+    }
+  }
+
+  @keyframes bob {
+    50% {
+      translate: 0 6px;
+    }
+  }
 }
 
 :root {
@@ -82,14 +157,15 @@
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
 
-  --ink: #3d3226;
-  --cream: #fdf9f3;
-  --blush: #f9c8d9;
-  --pink: #f4a6c1;
-  --sage: #c3d4b8;
-  --sage-dark: #9db38c;
-  --font-display: "Fraunces", serif;
-  --font-body: "Sora", sans-serif;
+  --ink: #3a1c1c;
+  --cream: #fff4e8;
+  --paper: #fffaf3;
+  --blush: #fbd0d8;
+  --pink: #f6a5b5;
+  --red: #d9251d;
+  --sky: #bcd6ee;
+  --font-display: "Fraunces Variable", serif;
+  --font-body: "DM Sans Variable", sans-serif;
 }
 
 .dark {
@@ -132,13 +208,54 @@
   }
   body {
     @apply bg-background text-foreground;
+    font-family: var(--font-body);
   }
   html {
     @apply font-sans;
   }
+  :focus-visible {
+    outline: 2px solid var(--red);
+    outline-offset: 3px;
+  }
 }
 
-.font-display {
-  font-family: var(--font-display);
-  font-style: italic;
+@layer components {
+  .font-display {
+    font-family: var(--font-display);
+    font-weight: 600;
+  }
+  .card {
+    @apply rounded-2xl border border-pink/50 bg-paper;
+  }
+}
+
+@keyframes reveal {
+  from {
+    opacity: 0;
+    translate: 0 1.5rem;
+  }
+}
+
+@supports (animation-timeline: view()) {
+  .reveal,
+  .card {
+    animation: reveal linear both;
+    animation-timeline: view();
+    animation-range: entry 0% entry 60%;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  ::before,
+  ::after {
+    animation: none !important;
+    transition-duration: 0.01ms !important;
+  }
 }
