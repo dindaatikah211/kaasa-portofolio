@@ -1,6 +1,6 @@
-"use server";
+import "server-only";
 
-import { put } from "@vercel/blob";
+import { put, del } from "@vercel/blob";
 
 export async function uploadFile(file: File, folder: string) {
   if (!file || file.size === 0) return null;
@@ -10,4 +10,8 @@ export async function uploadFile(file: File, folder: string) {
   });
 
   return blob.url;
+}
+
+export async function deleteFile(url: string) {
+  await del(url);
 }

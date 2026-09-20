@@ -1,7 +1,7 @@
 "use server";
 
 import { prisma } from "@/shared/lib/prisma";
-import { uploadFile } from "@/shared/services/blob-service";
+import { uploadFile, deleteFile } from "@/shared/services/blob-service";
 import { revalidatePath } from "next/cache";
 import type { ProfileFormState } from "../types";
 
@@ -54,5 +54,50 @@ export async function saveProfile(
   revalidatePath("/");
   revalidatePath("/dashboard/profile");
 
+  return { success: true };
+}
+
+export async function deleteGalleryImage(url: string): Promise<ProfileFormState> {
+  const existing = await prisma.profile.findFirst();
+
+  if (!existing || !existing.galleryUrls.includes(url)) {
+    return { error: "Gambar tidak ditemukan" };
+  }
+
+  await prisma.profile.update({
+    where: { id: existing.id },
+    data: { galleryUrls: existing.galleryUrls.filter((u) => u !== url) },
+  });
+
+  try {
+    await deleteFile(url);
+  } catch (err) {
+    console.error("Gagal hapus file dari blob:", err);
+  }
+
+  revalidatePath("/");
+  revalidatePath("/dashboard/profile");
+  return { success: true };
+}
+
+export async function deletePhoto(): Promise<ProfileFormState> {
+  const existing = await prisma.profile.findFirst();
+  if (!existing?.photoUrl) return { error: "Tidak ada foto" };
+
+  const oldUrl = existing.photoUrl;
+
+  await prisma.profile.update({
+    where: { id: existing.id },
+    data: { photoUrl: null },
+  });
+
+  try {
+    await deleteFile(oldUrl);
+  } catch (err) {
+    console.error("Gagal hapus file dari blob:", err);
+  }
+
+  revalidatePath("/");
+  revalidatePath("/dashboard/profile");
   return { success: true };
 }
