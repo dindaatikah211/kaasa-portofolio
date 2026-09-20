@@ -82,11 +82,12 @@
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
 
-  --ink: #2b1810;
-  --cream: #fff8f2;
-  --peach: #ffb088;
-  --coral: #ff7a6b;
-  --rose: #ff9fc7;
+  --ink: #3d3226;
+  --cream: #fdf9f3;
+  --blush: #f9c8d9;
+  --pink: #f4a6c1;
+  --sage: #c3d4b8;
+  --sage-dark: #9db38c;
   --font-display: "Fraunces", serif;
   --font-body: "Sora", sans-serif;
 }

@@ -20,6 +20,7 @@ export default async function Home() {
         name={profile?.name ?? "Dinda Atikah Ghaisani"}
         tagline={profile?.tagline ?? "A creative designer & developer."}
         photoUrl={profile?.photoUrl}
+        galleryUrls={profile?.galleryUrls ?? []}
         socials={socials}
       />
     </main>
