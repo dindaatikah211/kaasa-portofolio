@@ -1,21 +1,8 @@
 import Image from "next/image";
-import { FaInstagram, FaGithub, FaLinkedin, FaWhatsapp } from "react-icons/fa";
 import { NavPill } from "./nav-pill";
-
-const INTERESTS = ["Design", "Front-End", "UI/UX", "Illustration"];
-const BADGE_COLORS = ["var(--sage)", "var(--blush)"];
-
-const SOCIAL_ICONS: Record<string, React.ReactNode> = {
-  Instagram: <FaInstagram size={18} />,
-  GitHub: <FaGithub size={18} />,
-  LinkedIn: <FaLinkedin size={18} />,
-  WhatsApp: <FaWhatsapp size={18} />,
-};
-
-type SocialLink = {
-  label: string;
-  href: string;
-};
+import { SocialIcon } from "./social-icon";
+import { INTERESTS, BADGE_COLORS } from "../constants";
+import type { SocialLink } from "../types";
 
 function WashiTape({ rotate }: { rotate: number }) {
   return (
@@ -81,6 +68,9 @@ export function Hero({
               </>
             )}
           </h1>
+          <p className="mt-3 font-display text-xl" style={{ color: "var(--sage-dark)" }}>
+            Pixels, pastels, and a little bit of magic.
+          </p>
           <p className="mt-4 max-w-md text-[var(--ink)]/70">{tagline}</p>
 
           <div className="mt-6 flex flex-wrap gap-2">
@@ -106,7 +96,7 @@ export function Hero({
                   style={{ background: "var(--pink)" }}
                   aria-label={s.label}
                 >
-                  {SOCIAL_ICONS[s.label]}
+                  <SocialIcon label={s.label} />
                 </a>
               ))}
             </div>
@@ -127,7 +117,7 @@ export function Hero({
                 >
                   <WashiTape rotate={rotations[i] * -1} />
                   <div className="relative h-full w-full overflow-hidden">
-                    <Image src={url} alt="" fill className="object-cover" />
+                    <Image src={url} alt="" fill unoptimized className="object-cover" />
                   </div>
                 </div>
               );
