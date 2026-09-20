@@ -104,15 +104,19 @@ export function Hero({
         </div>
 
         {polaroids.length > 0 && (
-          <div className="relative mx-auto flex h-72 w-full max-w-md items-center justify-center sm:h-96">
+          <div className="relative mx-auto flex h-56 w-full max-w-md items-center justify-center sm:h-96">
             {polaroids.map((url, i) => {
               const rotations = [-9, 5, -4];
               const zIndexes = [1, 3, 2];
-              const offsets = ["-translate-x-16 -translate-y-4", "translate-x-8", "translate-x-28 translate-y-6"];
+              const offsets = [
+                "-translate-x-10 -translate-y-2 sm:-translate-x-16 sm:-translate-y-4",
+                "translate-x-4 sm:translate-x-8",
+                "translate-x-16 translate-y-3 sm:translate-x-28 sm:translate-y-6",
+              ];
               return (
                 <div
                   key={url}
-                  className={`absolute h-60 w-48 rounded-sm bg-white p-3 pb-9 shadow-xl sm:h-72 sm:w-56 ${offsets[i]}`}
+                  className={`absolute h-48 w-36 rounded-sm bg-white p-2 pb-7 shadow-xl sm:h-72 sm:w-56 sm:p-3 sm:pb-9 ${offsets[i]}`}
                   style={{ transform: `rotate(${rotations[i]}deg)`, zIndex: zIndexes[i] }}
                 >
                   <WashiTape rotate={rotations[i] * -1} />
