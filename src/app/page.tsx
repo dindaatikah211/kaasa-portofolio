@@ -25,6 +25,7 @@ export default async function Home() {
     ]);
 
   const socials = [
+    profile?.email && { label: "Email", href: `mailto:${profile.email}` },
     profile?.instagram && { label: "Instagram", href: profile.instagram },
     profile?.github && { label: "GitHub", href: profile.github },
     profile?.linkedin && { label: "LinkedIn", href: profile.linkedin },
@@ -58,7 +59,7 @@ export default async function Home() {
 
       <Section id="education" tone="cream" eyebrow="Background" title="Education">
         <TimelineList
-          plain
+          variant="plain"
           items={education.map((e) => ({
             id: e.id,
             title: e.title,
@@ -71,6 +72,7 @@ export default async function Home() {
 
       <Section id="organization" tone="blush" eyebrow="Beyond class" title="Organization">
         <TimelineList
+          variant="bento"
           items={organization.map((o) => ({
             id: o.id,
             title: o.title,
@@ -83,6 +85,7 @@ export default async function Home() {
 
       <Section id="volunteer" tone="cream" eyebrow="Giving back" title="Volunteer">
         <TimelineList
+          variant="tiles"
           items={volunteer.map((v) => ({
             id: v.id,
             title: v.title,
