@@ -1,8 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import Image from "next/image";
 import { EmptyNote } from "./empty-note";
+import { ImagePreview } from "./image-preview";
 import { Section } from "./section";
 import { PROJECT_CATEGORIES } from "../constants";
 import type { ProjectItem } from "../types";
@@ -11,7 +11,7 @@ function ProjectImage({ src, alt }: { src: string | null; alt: string }) {
   return (
     <div className="relative aspect-[4/3] w-full bg-blush">
       {src ? (
-        <Image src={src} alt={alt} fill unoptimized className="object-cover" />
+        <ImagePreview src={src} alt={alt} />
       ) : (
         <span className="flex h-full items-center justify-center text-xs text-ink/60">No image yet</span>
       )}

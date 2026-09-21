@@ -1,5 +1,5 @@
-import Image from "next/image";
 import { EmptyNote } from "./empty-note";
+import { ImagePreview } from "./image-preview";
 import { Section } from "./section";
 import type { CertificationItem } from "../types";
 
@@ -11,7 +11,7 @@ export function CertificationsSection({ items }: { items: CertificationItem[] })
           <div key={c.id} className="card overflow-hidden">
             {c.imageUrl && (
               <div className="relative aspect-[4/3] w-full">
-                <Image src={c.imageUrl} alt={c.title} fill unoptimized className="object-cover" />
+                <ImagePreview src={c.imageUrl} alt={c.title} />
               </div>
             )}
             <p className="p-3 text-xs font-medium sm:p-4 sm:text-sm">{c.title}</p>

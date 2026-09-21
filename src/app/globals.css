@@ -66,6 +66,7 @@
   --animate-float: float 7s ease-in-out infinite;
   --animate-twinkle: twinkle 4s ease-in-out infinite;
   --animate-bob: bob 1.8s ease-in-out infinite;
+  --animate-preview: preview 0.25s ease-out backwards;
 
   @keyframes rise {
     from {
@@ -119,6 +120,13 @@
   @keyframes bob {
     50% {
       translate: 0 6px;
+    }
+  }
+
+  @keyframes preview {
+    from {
+      opacity: 0;
+      scale: 0.96;
     }
   }
 }
