@@ -5,7 +5,7 @@ import { createPortal } from "react-dom";
 import Image from "next/image";
 import { FaSearchPlus, FaTimes } from "react-icons/fa";
 
-export function ImagePreview({ src, alt }: { src: string; alt: string }) {
+export function ImagePreview({ src, alt, contain = false }: { src: string; alt: string; contain?: boolean }) {
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
@@ -36,7 +36,7 @@ export function ImagePreview({ src, alt }: { src: string; alt: string }) {
           alt={alt}
           fill
           unoptimized
-          className="object-cover transition-transform duration-500 group-hover:scale-105"
+          className={`${contain ? "object-contain" : "object-cover"} transition-transform duration-500 group-hover:scale-105`}
         />
         <span className="absolute bottom-2 right-2 flex h-8 w-8 items-center justify-center rounded-full bg-paper/90 text-red opacity-0 transition-opacity group-hover:opacity-100">
           <FaSearchPlus size={12} />
