@@ -1,22 +1,22 @@
 import Image from "next/image";
 import type { ReactNode } from "react";
 import { NavPill } from "./nav-pill";
+import { Sparkle } from "./sparkle";
 import { SocialLinks } from "./social-links";
 import { INTERESTS, BADGE_COLORS } from "../constants";
 import type { SocialLink } from "../types";
-import { Sparkle } from "./sparkle";
 
 const POLAROIDS = [
   {
-    frame: "z-10 -translate-x-10 -translate-y-2 -rotate-9 sm:-translate-x-16 sm:-translate-y-4",
+    frame: "z-10 -translate-x-16 -translate-y-2 -rotate-9 sm:-translate-x-20 sm:-translate-y-4 lg:-translate-x-36",
     tape: "rotate-9",
   },
   {
-    frame: "z-30 translate-x-4 rotate-5 sm:translate-x-8",
+    frame: "z-30 translate-x-2 rotate-5",
     tape: "-rotate-5",
   },
   {
-    frame: "z-20 translate-x-16 translate-y-3 -rotate-4 sm:translate-x-28 sm:translate-y-6",
+    frame: "z-20 translate-x-24 translate-y-3 -rotate-4 sm:translate-y-6 lg:translate-x-36",
     tape: "rotate-4",
   },
 ];
@@ -60,7 +60,7 @@ export function Hero({
   const restName = nameParts.slice(1).join(" ");
 
   return (
-    <section className="relative min-h-screen w-full overflow-hidden bg-linear-to-b from-cream to-blush px-6 pb-28 pt-28 sm:px-16">
+    <section className="relative min-h-screen w-full overflow-hidden bg-linear-to-b from-cream to-blush px-6 pb-28 pt-40 sm:px-16">
       <NavPill />
 
       <div className="mx-auto grid max-w-6xl grid-cols-1 items-center gap-16 sm:grid-cols-2">
@@ -114,7 +114,7 @@ export function Hero({
             {polaroids.map((url, i) => (
               <div
                 key={url}
-                className={`absolute h-48 w-36 animate-pop transition-transform duration-300 hover:rotate-0 sm:h-72 sm:w-56 ${POLAROIDS[i].frame}`}
+                className={`absolute h-48 w-36 animate-pop transition-transform duration-300 hover:z-40 hover:rotate-0 hover:scale-105 sm:h-72 sm:w-56 ${POLAROIDS[i].frame}`}
                 style={delay(350 + i * 150)}
               >
                 <div
