@@ -36,6 +36,7 @@ export async function saveProfile(
     greeting: String(formData.get("greeting")),
     tagline: String(formData.get("tagline")),
     aboutText: String(formData.get("aboutText")),
+    email: String(formData.get("email") || "") || null,
     instagram: String(formData.get("instagram") || "") || null,
     github: String(formData.get("github") || "") || null,
     linkedin: String(formData.get("linkedin") || "") || null,

@@ -8,7 +8,7 @@ export function SocialLinks({ socials, className = "" }: { socials: SocialLink[]
         <a
           key={s.label}
           href={s.href}
-          target="_blank"
+          target={s.href.startsWith("mailto:") ? undefined : "_blank"}
           aria-label={s.label}
           className="flex h-11 w-11 items-center justify-center rounded-full bg-red text-cream transition-transform hover:-translate-y-1"
         >

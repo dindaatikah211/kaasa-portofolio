@@ -262,6 +262,7 @@ export function ProfileForm({ profile }: { profile: Profile | null }) {
 
         {deleteError && <p className="text-sm text-red-500">{deleteError}</p>}
 
+        <Field label="Email" name="email" type="email" defaultValue={profile?.email} />
         <Field label="Instagram" name="instagram" defaultValue={profile?.instagram ?? ""} />
         <Field label="GitHub" name="github" defaultValue={profile?.github ?? ""} />
         <Field label="LinkedIn" name="linkedin" defaultValue={profile?.linkedin ?? ""} />
@@ -292,18 +293,20 @@ export function ProfileForm({ profile }: { profile: Profile | null }) {
 function Field({
   label,
   name,
+  type,
   defaultValue,
   required,
 }: {
   label: string;
   name: string;
+  type?: string;
   defaultValue?: string | null;
   required?: boolean;
 }) {
   return (
     <label className="flex flex-col gap-1 text-sm">
       {label}
-      <input name={name} defaultValue={defaultValue ?? ""} required={required} className="border p-2" />
+      <input name={name} type={type} defaultValue={defaultValue ?? ""} required={required} className="border p-2" />
     </label>
   );
 }

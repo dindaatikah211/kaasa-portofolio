@@ -20,6 +20,7 @@ model Profile {
   greeting    String
   tagline     String
   aboutText   String
+  email       String?
   cvUrl       String?
   instagram   String?
   github      String?
